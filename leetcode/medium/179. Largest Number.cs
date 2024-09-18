@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,17 +12,18 @@ namespace leetcode.medium
 
         public string LargestNumber(int[] nums)
         {
-            string[] strs = nums.Select(x => x.ToString() + ).ToArray();
-
-            return "";
+            string[] strs = nums.Select(x => x.ToString()).ToArray();
+            Array.Sort(strs, new  StringComparer());
+            if (strs[0] == "0") return "0";
+            return String.Join("", strs); ;
         }
 
         public class StringComparer : Comparer<string>
         {
             public override int Compare(string? x, string? y)
             {
-                int xy = int.Parse(x + y);
-                int yx = int.Parse(y + x);
+                BigInteger xy = BigInteger.Parse(x + y);
+                BigInteger yx = BigInteger.Parse(y + x);
                 if (xy > yx)
                 {
                     return 1;
